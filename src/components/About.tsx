@@ -16,7 +16,7 @@ export default function About() {
           className="w-full md:w-1/2 relative h-[600px] md:h-[800px]"
         >
           <Image
-            src="https://images.unsplash.com/photo-1549417229-aa67d3263f33?q=80&w=2070&auto=format&fit=crop"
+            src="https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=2070&auto=format&fit=crop"
             alt="About PhoNyx"
             fill
             className="object-cover object-center grayscale hover:grayscale-0 transition-all duration-700"
