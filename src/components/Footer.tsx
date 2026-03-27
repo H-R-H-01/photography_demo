@@ -14,8 +14,8 @@ export default function Footer() {
         {/* Links */}
         <div className="flex space-x-8 text-xs tracking-widest uppercase text-[#1A1A1A]/70">
           <Link href="/" className="hover:text-[#1A1A1A] transition-colors">Home</Link>
-          <Link href="#portfolio" className="hover:text-[#1A1A1A] transition-colors">Portfolio</Link>
-          <Link href="#contact" className="hover:text-[#1A1A1A] transition-colors">Contact</Link>
+          <Link href="/portfolio" className="hover:text-[#1A1A1A] transition-colors">Portfolio</Link>
+          <Link href="/contact" className="hover:text-[#1A1A1A] transition-colors">Contact</Link>
         </div>
 
         {/* Socials */}

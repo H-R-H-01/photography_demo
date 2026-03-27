@@ -2,12 +2,14 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,23 +19,29 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const isHome = pathname === "/";
+
   const navLinks = [
     { name: "HOME", href: "/" },
-    { name: "PORTFOLIO", href: "#portfolio" },
-    { name: "TESTIMONIALS", href: "#testimonials" },
-    { name: "ABOUT", href: "#about" },
-    { name: "CONTACT US", href: "#contact" },
+    { name: "PORTFOLIO", href: "/portfolio" },
+    { name: "TESTIMONIALS", href: "/testimonials" },
+    { name: "ABOUT", href: isHome ? "#about" : "/#about" },
+    { name: "CONTACT US", href: "/contact" },
   ];
+
+  const navBackground = (scrolled || !isHome)
+    ? "bg-[#FAF9F6]/95 backdrop-blur-md py-4 shadow-sm"
+    : "bg-transparent py-6";
+
+  const textColor = (!scrolled && isHome) ? "text-[#FAF9F6]" : "text-[#1A1A1A]";
 
   return (
     <>
       <nav
-        className={`fixed w-full z-50 transition-all duration-300 ${
-          scrolled ? "bg-[#FAF9F6]/90 backdrop-blur-md py-4 shadow-sm" : "bg-transparent py-6"
-        }`}
+        className={`fixed w-full z-50 transition-all duration-300 ${navBackground}`}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
-          <Link href="/" className="text-2xl font-serif tracking-widest text-[#1A1A1A]">
+          <Link href="/" className={`text-2xl font-serif tracking-widest ${textColor} transition-colors`}>
             PhoNyx
           </Link>
 
@@ -43,7 +51,7 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-xs tracking-[0.15em] hover:opacity-60 transition-opacity text-[#1A1A1A]"
+                className={`text-xs tracking-[0.15em] hover:opacity-60 transition-colors ${textColor}`}
               >
                 {link.name}
               </Link>
@@ -52,7 +60,7 @@ export default function Navbar() {
 
           {/* Mobile Menu Toggle */}
           <button
-            className="md:hidden text-[#1A1A1A]"
+            className={`md:hidden ${textColor} transition-colors`}
             onClick={() => setMobileMenuOpen(true)}
           >
             <Menu size={24} />
